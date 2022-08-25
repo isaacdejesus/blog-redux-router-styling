@@ -1,5 +1,6 @@
 import { logIn } from '../reducers/userReducer.js'
 import { useDispatch } from 'react-redux'
+import {Button, Box, Typography, TextField, Stack} from '@mui/material';
 const LoginForm = ({props}) => {
     const dispatch = useDispatch()
     const handleSubmit = (event) => {
@@ -10,26 +11,42 @@ const LoginForm = ({props}) => {
         }        
         dispatch(logIn(credentials)) 
     }
+    const styles = {
+        textfieldStyles: {
+            input: {
+                border: 'none',
+                borderRadius: '4px'
+            },
+            width: "100%",
+            mt: "0.5rem",
+            mb: "0.5rem",
+        }
+    }
     return (
-        <div>
-            <h2> Log in</h2>
-            <form onSubmit={handleSubmit}>
+        <Stack
+            sx={{borderRadius: "4px",  }}
+        >
+            <form   className="form" onSubmit={handleSubmit}>
                 <div>
-                    username
-                    <input
+                    <TextField
                         name="username"
+                        placeholder="username"
+                        sx={styles.textfieldStyles}
                     />
                 </div>
                 <div>
-                    password
-                    <input
+                    <TextField
                         name="password"
                         type="password"
+                        placeholder="password"
+                        sx={styles.textfieldStyles}
                     />
                 </div>
-                    <button type="submit">login</button>
+                    <Box textAlign="center">
+                    <Button variant="contained" sx={{mt: ".5rem"}} type="submit">login</Button>
+                    </Box>
                 </form>
-            </div>
+            </Stack>
     )
 }
 

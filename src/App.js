@@ -1,31 +1,37 @@
-import { useState, useEffect } from 'react'
-import Blog from './components/Blog'
-import LoginForm from './components/LoginForm.js'
-import PostForm from './components/PostForm.js'
-import Togglable from './components/Togglable.js'
 import GoodNotif from './components/GoodNotif.js'
-import blogService from './services/blogs'
-import loginService from './services/login.js'
-import { useDispatch, useSelector } from 'react-redux'
-import {setNotif, clearNotif} from './reducers/notifReducer.js'
-import {initializePosts} from './reducers/postReducer.js'
-import {setUser, clearUser} from './reducers/userReducer.js'
-import {addPost, setPosts, addaPost} from './reducers/postReducer.js'
 import Users from './components/Users';
 import Posts from './components/Posts.js';
-import {Routes, Route} from 'react-router-dom';
+import User from './components/User.js';
+import Blog from './components/Blog.js';
+import Login from './components/Login.js';
+import {Routes, Route, useMatch, useParams, useNavigate, Navigate} from 'react-router-dom';
+import {useSelector, } from 'react-redux';
+import {Box, Stack} from "@mui/material";
+import Nav from './components/Nav.js'
+import './App.css'
 const App = () => {
+    const user = useSelector(state => state.user);
   return (
-    <div>
+    <Box
+      sx={{
+          backgroundColor: "#fff"
+      }}  
+    >
+    <Stack
+        m="auto"
+      >
       <GoodNotif />
-
+      <Nav />
       <Routes>
-        <Route path="/" element={<Posts />} />
-        <Route path="/users" element={<Users />} />
+        <Route path="/users/:id" element={<User  />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/blogs" element={ user ? <Posts /> : <Navigate replace to = "/" />} />
+        <Route exact path="/blogs/:id" element={<Blog />} />
+        <Route path="/users" element={user ?  <Users />: <Navigate replace to="/" />} />
       </Routes>
-    </div>
+    </Stack>
+    </Box>
   )
 }
-
 
 export default App

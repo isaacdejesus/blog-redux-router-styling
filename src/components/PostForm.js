@@ -1,5 +1,17 @@
 import { useState } from 'react'
+import {Box, Typography, Stack, Button, TextField} from '@mui/material';
 const PostForm = ({ createPost }) => {
+    const styles = {
+        fieldStyles: {
+            input: {
+                border: 'none',
+                borderRadius: '4px'
+            },
+            width: "100%",
+            mt: "0.5rem",
+            mb: "0.5rem"
+        }
+    }
     const [newTitle, setNewTitle] = useState('')
     const [newAuthor, setNewAuthor] = useState('')
     const [newUrl, setNewUrl] = useState('')
@@ -31,37 +43,43 @@ const PostForm = ({ createPost }) => {
     }
     return (
         <div>
-            <h2>Create new blog post</h2>
+            <Typography variant="h5" pb="1rem"  >Create a new post: </Typography>
             <form onSubmit={addPost}>
                 <div>
-                    title
-                    <input 
+                    <TextField 
                         value={newTitle}
                         onChange={handleTitleChange} 
+                        placeholder="title"
+                        sx={styles.fieldStyles}
                     />
                 </div>
                 <div>
-                    author
-                    <input 
+                    <TextField 
                         value={newAuthor}
                         onChange={handleAuthorChange} 
+                        placeholder="author"
+                        sx={styles.fieldStyles}
                     />
                 </div>
                 <div>
-                    url
-                    <input 
+                    <TextField 
                         value={newUrl}
                         onChange={handleUrlChange} 
+                        placeholder="url"
+                        sx={styles.fieldStyles}
                     />
                 </div>
                 <div>
-                    likes
-                    <input 
+                    <TextField 
                         value={likes}
                         onChange={handleLikes} 
+                        placeholder="likes"
+                        sx={styles.fieldStyles}
                     />
                 </div>
-                    <button type="submit">post</button>
+                    <Box textAlign="center" mt="1rem"> 
+                    <Button type="submit" variant="contained" >post</Button>
+                    </Box>
             </form>
         </div>
     )
