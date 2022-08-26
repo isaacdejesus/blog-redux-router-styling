@@ -2,6 +2,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import Togglable from './Togglable.js';
 import LoginForm from './LoginForm.js';
+import CreateAccountForm from './CreateAccountForm.js';
 import {useEffect} from 'react';
 import blogService from '../services/blogs.js';
 import {setUser} from '../reducers/userReducer.js';
@@ -20,8 +21,7 @@ const Login = () => {
             sx={{
                 width: "70%",
                 backgroundColor: 'rgba(0, 0, 0, .9)',
-                height: "60vh",
-                pt: '15%'
+                pt: '5%'
             }}
                 m="auto"
         >
@@ -36,6 +36,9 @@ const Login = () => {
                 </Typography>
                 <Togglable buttonLabel='login'>
                     <LoginForm/>
+                </Togglable> 
+                <Togglable buttonLabel='Sign up'>
+                    <CreateAccountForm/>
                 </Togglable> 
             </Stack>
         </Stack>
