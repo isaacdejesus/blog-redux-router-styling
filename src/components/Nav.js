@@ -34,9 +34,14 @@ const Nav = () => {
                 direction="row"
                 alignItems="center"
                 justifyContent="flex-start"
-                sx={{spacing: "12"}}
+                sx={{
+                    spacing: "12",
+                        direction: {
+                            med: "column"
+                        }
+                }}
             >
-            <Typography mr=".5rem" ml=".5rem" variant="h6" ><Link to="/" style={{textDecoration: 'none', color: "#fff"}}>Home</Link></Typography>
+            <Typography mr=".5rem" ml=".5rem" variant="h6" sx={{display: {xs: 'none', md: 'block'}}} ><Link to="/" style={{textDecoration: 'none', color: "#fff"}}>Home</Link></Typography>
             <Typography mr=".5rem" ml=".5rem" variant="h6"><Link to="/blogs" style={{textDecoration: 'none', color: "#fff"}}>Blogs</Link></Typography>
             <Typography mr=".5rem" ml=".5rem" variant="h6"><Link to="/users" style={{textDecoration: 'none', color: "#fff"}}>Users</Link></Typography>
             </Stack>
@@ -48,11 +53,16 @@ const Nav = () => {
                 pb="1rem"
                 mr=".5rem"
                 ml=".5rem"
+                sx={{display: {xs: 'none', md: 'block'}}}
             >
 
                 {user.name} logged in
              </Typography>
-            <Button variant="contained" color="warning" onClick={handleLogOut } ml=".5rem" mr=".5rem">logout</Button></>)
+            <Button variant="contained" color="warning" onClick={handleLogOut } ml=".5rem" mr=".5rem"
+                size="small" 
+            >
+            logout
+            </Button></>)
             : ''
         }
         </Stack>

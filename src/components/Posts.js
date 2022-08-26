@@ -14,7 +14,7 @@ import {setUser, clearUser} from '../reducers/userReducer.js'
 import {addPost, setPosts, addaPost} from '../reducers/postReducer.js'
 import Users from './Users';
 import {Box, Stack, Button, Typography} from '@mui/material';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 const Posts = () => {
     const [vblogs, setBlogs] = useState([])
     const [successMsg, setSuccessMsg] = useState(null)
@@ -47,6 +47,7 @@ const Posts = () => {
         window.localStorage.clear();
         dispatch(clearUser());
     }
+    const navigate = useNavigate();
     return(
         <Box>
             <Stack
@@ -63,7 +64,7 @@ const Posts = () => {
             Async Blog
         </Typography>
       {user === null ?
-          <h1>user is null</h1>
+          navigate("/")
           :
        <div>
             <Stack
@@ -86,6 +87,7 @@ const Posts = () => {
                         borderRadius="3px"
                         m=".5px"
                         p=".5px"
+                        pl="1rem"
                         color="#143F6B"
                     >
                        <Link to={`/blogs/${blog.id}`} style={{textDecoration:"none", color: "#000"}}> 

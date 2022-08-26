@@ -3,13 +3,24 @@ import {useEffect} from 'react';
 import {initializeUsers} from '../reducers/usersReducer.js';
 import {Box, Stack, Button, Typography} from '@mui/material';
 import User from './User.js';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
+import {setUser} from '../reducers/userReducer.js';
+import blogService from '../services/blogs.js';
 const Users = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(initializeUsers())
     },[])
+    useEffect(() => {
+        const loggedUserJSON = window.localStorage.getItem('LoggedBlogappUser')
+        if(loggedUserJSON){ const user = JSON.parse(loggedUserJSON)
+            dispatch(setUser(user))
+            blogService.setToken(user.token)
+        }
+    }, [])
     const users = useSelector(state => state.users);
+    const user = useSelector(state => state.user);
+    const navigate = useNavigate();
     return(
         <Box>
             <Stack
@@ -26,7 +37,8 @@ const Users = () => {
             >
                 USERS 
             </Typography>
-                {users.map(user => 
+                { user === null ? navigate("/") :
+                    users.map(user => 
                     <Typography 
                         key = {user.id}
                         variant="h6"
@@ -35,12 +47,14 @@ const Users = () => {
                         m=".5px"
                         p=".5px"
                         color="#143F6B"
+                        pl="1rem"
                     >
                         <Link to={`/users/${user.id}`} style={{textDecoration:"none", color: "#000"}}>{user.name}</Link>
                     </Typography>
                 )}
         </Stack>
         </Box>
+    
     )
 }
 export default Users;

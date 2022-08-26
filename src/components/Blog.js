@@ -59,26 +59,41 @@ const Blog = () =>{
             dispatch(clearNotif())
         },3000)
     }
+    if(!blog)
+        return null
     return(
-        <Box>
             <Stack
                 margin="auto"
                 width="60%"
-                height="100vh"
                 p="5%"
                 //alignItems="center"
                 sx={{backgroundColor: "#EFEFEF"}}
             >
-                <Typography> {blog.title}</Typography>
-            <a href="{blog.url}" target="_blank" rel="noopener noreferrer">{blog.url} </a>
-            <p> {blog.likes} Likes<span> </span> 
-           <Link to= {`/blogs/${blog.id}`}> <button onClick={()=>UpdateLikes(blog)}>Like </button></Link>
-            </p>
-            <span> added by {blog.author} </span>
-                <Box textAlign="center">
-                    <Button onClick={()=>handleDel(blog.id)} variant="contained">delete </Button>
+                <Stack
+                    sx={{backgroundColor: "rgba(113,90, 163, .1)", borderRadius: "6px"}}
+                    p="2%"
+                >
+                <Typography variant="h5" color="#1B2430"> {blog.title}</Typography>
+                <Typography variant="subtitle1" color="#816797">Written by {blog.author}</Typography>
+                <Typography 
+                    variant="subtitle1"
+                > 
+                    <a href="{blog.url}" target="_blank" rel="noopener noreferrer" > Link to blog: {blog.url} </a>
+                </Typography>
+                <Typography
+                    variant="p"
+                    color="green"
+                    pt=".3rem"
+                > {blog.likes} Likes<span> </span> 
+                    <Link to= {`/blogs/${blog.id}`}> 
+                        <Button variant="contained" color="success" size="small" sx={{ml:"2%"}} onClick={()=>UpdateLikes(blog)}>Like </Button>
+                    </Link>
+                </Typography>
+                </Stack>
+                <Box mt="2%" mb="3%">
+                    <Button onClick={()=>handleDel(blog.id)} variant="contained" color="error" size="small">delete </Button>
                 </Box>
-            <h2>add a comment </h2>
+            <Typography p="2px">Leave a comment! </Typography>
             <TextField 
                 value={comment} 
                 onChange={(e) => dispatch(setComment(e.target.value))} 
@@ -86,13 +101,12 @@ const Blog = () =>{
                 type="text"
             />
                 <Box textAlign="center">
-            <Button onClick={handleComment} variant="contained">Submit </Button>
+            <Button onClick={handleComment} variant="contained" sx={{m:"2%"}}>Submit </Button>
                 </Box>
         {blog.comments.map(comment => (
-            <p key={comment.id}>{comment.comment}</p>
+            <Typography key={comment.id} p=".5%" color="#4C3A51">{comment.comment}</Typography>
         ))}
             </Stack>
-        </Box>  
 )}
 
 export default Blog

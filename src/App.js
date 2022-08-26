@@ -25,9 +25,9 @@ const App = () => {
       <Routes>
         <Route path="/users/:id" element={<User  />} />
         <Route path="/" element={<Login />} />
-        <Route path="/blogs" element={ user ? <Posts /> : <Navigate replace to = "/" />} />
+        <Route path="/blogs" element={ user !== undefined ? <Posts /> : <Navigate replace to = "/" />} />
         <Route exact path="/blogs/:id" element={<Blog />} />
-        <Route path="/users" element={user ?  <Users />: <Navigate replace to="/" />} />
+        <Route path="/users" element={user !== undefined ?  <Users />: <Navigate replace to="/" />} />
       </Routes>
     </Stack>
     </Box>

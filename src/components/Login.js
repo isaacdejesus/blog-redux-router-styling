@@ -20,7 +20,7 @@ const Login = () => {
             sx={{
                 width: "70%",
                 backgroundColor: 'rgba(0, 0, 0, .9)',
-                height: "100vh",
+                height: "60vh",
                 pt: '15%'
             }}
                 m="auto"
