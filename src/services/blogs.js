@@ -1,5 +1,6 @@
 import axios from 'axios'
-const baseUrl = '/api/posts'
+//const baseUrl = 'https://blog-appbackend.herokuapp.com/api/posts'
+const baseUrl = 'https://cold-bird-3402.fly.dev/api/posts'
 let token = null
 
 const setToken = newToken => {

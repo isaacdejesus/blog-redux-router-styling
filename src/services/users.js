@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = '/api/users'
+const baseUrl = 'https://cold-bird-3402.fly.dev/api/users'
 
 const getAll = () => {
   const request = axios.get(baseUrl)
